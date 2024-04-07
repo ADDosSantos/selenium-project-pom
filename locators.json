@@ -1,0 +1,3 @@
+{
+    "example_locator":"(By.XPATH, //*[@example = 'lovely example'])"
+}
