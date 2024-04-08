@@ -1,15 +1,12 @@
-##### Testing 123
+#testing 1234
 import pytest
 import time
 import requests
 import os
 from selenium import webdriver
-#from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-#from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-#from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.wait import WebDriverWait
 
 # Configuring Selenoid
 base_url = "http://localhost"
@@ -43,21 +40,16 @@ def browser():
     yield driver
 
     # Begin Teardown
-    
     session_id = driver.session_id
-    print (f"Session ID: {session_id}")
     driver.quit()
-    # If test fails, download video.
-
-    if pytest._result is not None and pytest._result.failed:
-        download_video(session_id, videos_folder)
+    download_video(session_id)
 
 @pytest.fixture
 def explicit_wait(browser):
     wait = WebDriverWait(browser, 30)
     yield wait
 
-def download_video(session_id, videos_folder):
+def download_video(session_id):
     # As per Selenoid documentation, target of the video.
     video_url = f"{videos_url}{session_id}.mp4"
     # Define the file path for saving the video file

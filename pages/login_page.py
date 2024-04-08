@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
-#import conftest
+from pages.base_page import BasePage
 
-class LoginPage():
+class LoginPage(BasePage):
         # Test methods
 
         def __init__(self, browser):
@@ -16,16 +16,20 @@ class LoginPage():
 
         # Test methods
         def perform_login(self, username, password):
-            self.browser.find_element(*self.form_username_locator).send_keys(username)
-            self.browser.find_element(*self.form_password_locator).send_keys(password)
-            self.browser.find_element(*self.btn_login_locator).click()
+            self.write(self.form_username_locator, username)
+            self.write(self.form_password_locator, password)
+            self.click(self.btn_login_locator)
+            #self.browser.find_element(*self.form_username_locator).send_keys(username)
+            #self.browser.find_element(*self.form_password_locator).send_keys(password)
+            #self.browser.find_element(*self.btn_login_locator).click()
         
         # Assertion methods
 
         def assert_bad_login(self):
-            assert self.browser.find_element(*self.login_error_message_locator).is_displayed()
+            self.assert_element_displayed(self.login_error_message_locator)
+            # assert self.browser.find_element(*self.login_error_message_locator).is_displayed()
 
         def assert_login_logo(self):
-            assert self.browser.find_element(*self.login_logo_locator).is_displayed()
-                
-                
+            self.assert_element_displayed(self.login_logo_locator)
+            # assert self.browser.find_element(*self.login_logo_locator).is_displayed()
+

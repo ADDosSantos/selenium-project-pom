@@ -11,7 +11,7 @@ bad_username = "zzzzzzzzzzzz"
 def test_01_login_valido(browser):
         login_page = LoginPage(browser)
         time.sleep(3) # Demo purposes only.
-        login_page.perform_login(username, password)
+        login_page.perform_login(bad_username, password)
         landing_page = ProductsPage(browser)
         landing_page.assert_page_title()
         time.sleep(3) # Demo purposes only.
