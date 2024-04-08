@@ -21,7 +21,7 @@ videos_folder = "videos"
 if not os.path.exists(videos_folder):
     os.makedirs(videos_folder)
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def browser():
     # Define desired capabilities for Chrome browser
     chrome_capabilities = DesiredCapabilities.CHROME.copy()
@@ -47,7 +47,10 @@ def browser():
     session_id = driver.session_id
     print (f"Session ID: {session_id}")
     driver.quit()
-    download_video(session_id, videos_folder)
+    # If test fails, download video.
+
+    if pytest._result is not None and pytest._result.failed:
+        download_video(session_id, videos_folder)
 
 @pytest.fixture
 def explicit_wait(browser):
