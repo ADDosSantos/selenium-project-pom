@@ -20,7 +20,6 @@ videos_folder = "videos"
 if not os.path.exists(videos_folder):
     os.makedirs(videos_folder)
 
-
 @pytest.fixture(scope="function")
 def browser():
     # Define desired capabilities for Chrome browser
@@ -37,18 +36,22 @@ def browser():
     driver.get("https://www.saucedemo.com")
     driver.set_window_size(1280, 1024)
     
-    # initializing explicit and implicit waits
-    wait = WebDriverWait(driver, 30)
+    # initializing implicit wait
     driver.implicitly_wait(7) 
     
     yield driver
+
     # Begin Teardown
+    
     session_id = driver.session_id
     print (f"Session ID: {session_id}")
     driver.quit()
     download_video(session_id, videos_folder)
 
-
+@pytest.fixture
+def explicit_wait(browser):
+    wait = WebDriverWait(browser, 30)
+    yield wait
 
 def download_video(session_id, videos_folder):
     # As per Selenoid documentation, target of the video.
@@ -57,6 +60,8 @@ def download_video(session_id, videos_folder):
     file_path = os.path.join(videos_folder, f"{session_id}.mp4")
     
     # Download the video file
+    # Note: Selenoid has an small issue: it takes some time to make the video available 
+    # because of internal renaming. So, a retry mechanism is necessary. Sorry for the time.sleep.
     for retry in range(4): 
         response = requests.get(video_url, allow_redirects=True)
         time.sleep(retry)
