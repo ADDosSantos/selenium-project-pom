@@ -1,3 +1,4 @@
+##### Testing 123
 import pytest
 import time
 import requests
@@ -20,7 +21,7 @@ videos_folder = "videos"
 if not os.path.exists(videos_folder):
     os.makedirs(videos_folder)
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def browser():
     # Define desired capabilities for Chrome browser
     chrome_capabilities = DesiredCapabilities.CHROME.copy()
