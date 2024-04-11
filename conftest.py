@@ -1,8 +1,10 @@
 #testing 1234
+
 import pytest
 import time
 import requests
 import os
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -18,7 +20,7 @@ videos_folder = "videos"
 if not os.path.exists(videos_folder):
     os.makedirs(videos_folder)
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="class")
 def browser():
     # Define desired capabilities for Chrome browser
     chrome_capabilities = DesiredCapabilities.CHROME.copy()
@@ -27,7 +29,7 @@ def browser():
     selenoid_options = {"enableVideo": True}
     options.set_capability("selenoid:options", selenoid_options)
     
-    # Initialize WebDriver with Selenoid
+# Initialize WebDriver with Selenoid
     driver = webdriver.Remote(
         selenoid_url, options=options
     )
@@ -41,13 +43,22 @@ def browser():
 
     # Begin Teardown
     session_id = driver.session_id
+    print(session_id)
     driver.quit()
     download_video(session_id)
 
 @pytest.fixture
-def explicit_wait(browser):
-    wait = WebDriverWait(browser, 30)
+def explicit_wait(driver):
+    wait = WebDriverWait(driver, 30)
     yield wait
+
+## Initializing Faker
+#@pytest.fixture(autouse=True)
+#def faker():
+#    seed_int = random.randint(1, 999999999)
+#    Faker.seed(seed_int)
+#    faker = Faker()
+#    yield faker
 
 def download_video(session_id):
     # As per Selenoid documentation, target of the video.

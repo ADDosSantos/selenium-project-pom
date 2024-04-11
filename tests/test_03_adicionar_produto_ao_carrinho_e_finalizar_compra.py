@@ -1,14 +1,13 @@
+import random
 import time
 from faker import Faker
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-#from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import requests
 import os
-from selenium.webdriver.support.select import Select
 
 # Create the project folder if it doesn't exist
 videos_folder = "videos"
@@ -17,8 +16,9 @@ if not os.path.exists(videos_folder):
     os.makedirs(videos_folder)
 
 # Initializing Faker
+seed_int = random.randint(1, 999999999)
+Faker.seed(seed_int)
 fake = Faker()
-Faker.seed(0)
 
 # Configuring Selenoid
 base_url = "http://localhost"
