@@ -19,11 +19,13 @@ if not os.path.exists(download_path):
         print("Failed to download cm.exe")
 
 # Start Selenoid and Selenoid-Ui
-print("Start Selenoid and Selenoid-Ui...")
+print("\nStart Selenoid and Selenoid-Ui...")
 subprocess.run(["cm.exe", "selenoid", "start", "--vnc", "--browsers-json", "tools\\config\\browsers.json"])
 subprocess.run(["cm.exe", "selenoid-ui", "start"])
 
 # Validating status
-print("... Status of Selenoid and Selenoid-Ui.")
+print("\n... Status of Selenoid and Selenoid-Ui.")
 subprocess.run(["cm.exe", "selenoid", "status"])
 subprocess.run(["cm.exe", "selenoid-ui", "status"])
+
+print("\nNote: By default, selenoid is running in port :4444 and the UI is up in :8080\n")

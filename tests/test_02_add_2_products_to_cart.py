@@ -19,14 +19,14 @@ class Test_02_add_products_to_cart():
         products_page = ProductsPage(browser)
         products_page.assert_products_page_title()
         # Adding Backpack to cart
-        products_page.find_and_enter_backpack_item_page()
+        products_page.find_and_enter_item_page("Sauce Labs Backpack")
         item_page = ItemPage(browser)
         item_page.click_btn_add_to_cart()
         # ASSERTing Backpack in cart
         item_page.click_btn_view_shopping_cart()
         shopping_cart_page = CartPage(browser)
         shopping_cart_page.assert_cart_page_title()
-        shopping_cart_page.assert_Backpack_displayed()
+        shopping_cart_page.assert_item_displayed("Sauce Labs Backpack")
         # Adding Onesie as item
         shopping_cart_page.click_continue_shopping()
         products_page.find_and_enter_onesie_item_page()

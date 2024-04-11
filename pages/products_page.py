@@ -8,21 +8,27 @@ class ProductsPage(BasePage):
         
         # Locator attributes
 
-        backpack_locator = (By.XPATH, "//*[contains(@class, 'inventory_item_name') and text()='Sauce Labs Backpack']")
-        onesie_locator = (By.XPATH, "//*[contains(@class, 'inventory_item_name') and text()='Sauce Labs Onesie']")
+        item_locator = (By.XPATH, "//*[contains(@class, 'inventory_item_name') and text()='{}']")
+        #backpack_locator = (By.XPATH, "//*[contains(@class, 'inventory_item_name') and text()='Sauce Labs Backpack']")
+        #onesie_locator = (By.XPATH, "//*[contains(@class, 'inventory_item_name') and text()='Sauce Labs Onesie']")
         btn_go_to_cart_locator = (By.XPATH, "//a[@class, 'shopping_cart_link')]")
         products_page_title_locator = (By.XPATH, "//span[@class = 'title']")
         products_page_title_text = "Products"
 
         # Test methods
 
-        def find_and_enter_backpack_item_page(self):
-            self.assert_element_displayed(self.backpack_locator)
+        def find_and_enter_item_page(self, item_name):
+            item_locator = (self.item_locator[0], self.item_locator[1].format(item_name))
+            self.assert_element_displayed(item_locator)
             self.click(self.backpack_locator)
 
-        def find_and_enter_onesie_item_page(self):
-            self.assert_element_displayed(self.onesie_locator)
-            self.click(self.onesie_locator)
+        #def find_and_enter_backpack_item_page(self):
+        #    self.assert_element_displayed(self.backpack_locator)
+        #    self.click(self.backpack_locator)
+        #
+        #def find_and_enter_onesie_item_page(self):
+        #    self.assert_element_displayed(self.onesie_locator)
+        #    self.click(self.onesie_locator)
 
         def click_btn_go_to_cart(self):
             self.assert_element_displayed(self.btn_go_to_cart_locator)

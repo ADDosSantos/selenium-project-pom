@@ -19,11 +19,3 @@ class ItemPage(BasePage):
     def click_btn_view_shopping_cart(self):
         self.click(self.btn_to_shopping_cart)
 
-  
-        # Assertion methods
-        
-#        def assert_page_title(self):
-#            self.assert_element_displayed(self.products_page_title_locator)
-#
-#        def element_not_present(self):
-#            self.assert_element_NOT_displayed(self.products_page_title_locator)

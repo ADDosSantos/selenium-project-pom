@@ -67,8 +67,10 @@ def download_video(session_id):
     file_path = os.path.join(videos_folder, f"{session_id}.mp4")
     
     # Download the video file
-    # Note: Selenoid has an small issue: it takes some time to make the video available 
-    # because of internal renaming. So, a retry mechanism is necessary. Sorry for the time.sleep.
+    # Note: Selenoid has an small (known) issue: it takes some time to process and make the videos available 
+    # Sometimes the download request is faster, causing an error. So, a retry mechanism is necessary. 
+    # Sorry for the time.sleep.
+    
     for retry in range(4): 
         response = requests.get(video_url, allow_redirects=True)
         time.sleep(retry)
