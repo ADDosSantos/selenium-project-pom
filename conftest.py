@@ -59,6 +59,11 @@ def browser(request):
             "chrome": ChromeOptions(),
             "firefox": FirefoxOptions(),
         }
+
+        # I was having fun... why not?
+        if headless:
+            options[browser_type].add_argument("--headless")
+
         if browser_type == "chrome":
             # Set any desired capabilities for Chrome
             options[browser_type].add_argument("--window-size=1280,1024")  # Example of adding a Chrome option
@@ -73,21 +78,19 @@ def browser(request):
             driver = webdriver.Firefox(options=options[browser_type])
         else:
             raise ValueError("Invalid browser type specified.")
-    
-        # I was having fun... why not?
-        if headless:
-            options[browser_type].add_argument("--headless")
-    
+
     # Initializing implicit wait
     driver.implicitly_wait(7) 
-    
+    session_id = driver.session_id
+    driver.get("https://www.saucedemo.com")
+
     yield driver
 
     # Begin Teardown
-    session_id = driver.session_id
     print(session_id)
     driver.quit()
-    download_video(session_id)
+    if use_remote:
+        download_video(session_id)
 
 @pytest.fixture
 def explicit_wait(driver):
