@@ -29,13 +29,7 @@ class CartPage(BasePage):
         def assert_item_displayed(self, item_name):
             item = (self.item_locator[0], self.item_locator[1].format(item_name))
             self.assert_element_displayed(item)
-
-#        def assert_Backpack_displayed(self):
-#            self.assert_element_displayed(self.backpack_locator)
-#
-#        def assert_onesie_displayed(self):
-#            self.assert_element_displayed(self.onesie_locator)
-        
+     
         def assert_cart_page_title(self):
             self.assert_page_title(self.cart_page_title_locator, self.cart_page_title_text)
 
