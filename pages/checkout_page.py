@@ -52,13 +52,15 @@ class CheckoutPage(BasePage):
 
     def assert_checkout_overview_products(self, products):
         product_page = ProductsPage(self.browser)
+        if isinstance(products, str):
+            products = (products,)  # Convert single string to tuple containing one element
         for product in products:
             item_locator = (product_page.item_locator[0], product_page.item_locator[1].format(product))
+            print(item_locator)
             self.assert_element_displayed(item_locator)
 
     def assert_checkout_overview_page_title(self):
         self.assert_page_title(self.checkout_page_title_locator, self.checkout_page_title_text_overview)
-
 
     def assert_checkout_complete_elements(self):
         self.assert_page_title(self.checkout_page_title_locator, self.checkout_page_title_text_complete)
