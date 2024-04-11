@@ -52,14 +52,6 @@ def explicit_wait(driver):
     wait = WebDriverWait(driver, 30)
     yield wait
 
-## Initializing Faker
-#@pytest.fixture(autouse=True)
-#def faker():
-#    seed_int = random.randint(1, 999999999)
-#    Faker.seed(seed_int)
-#    faker = Faker()
-#    yield faker
-
 def download_video(session_id):
     # As per Selenoid documentation, target of the video.
     video_url = f"{videos_url}{session_id}.mp4"

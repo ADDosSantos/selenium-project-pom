@@ -25,7 +25,7 @@ class Test_02_add_products_to_cart():
         item_page = ItemPage(browser)
         item_page.click_btn_add_to_cart()
         # ASSERTing Backpack in cart
-        item_page.click_btn_view_shopping_cart()
+        item_page.click_icon_shopping_cart()
         shopping_cart_page = CartPage(browser)
         shopping_cart_page.assert_cart_page_title()
         shopping_cart_page.assert_item_displayed("Test.allTheThings() T-Shirt (Red)")

@@ -34,7 +34,7 @@ class Test_02_add_products_to_cart():
         products_page.find_and_enter_item_page("Sauce Labs Onesie")
         item_page.click_btn_add_to_cart()
         # ASSERTing Onesie in cart
-        item_page.click_btn_view_shopping_cart()
+        item_page.click_icon_shopping_cart()
         shopping_cart_page.assert_cart_page_title()
         shopping_cart_page.assert_item_displayed("Sauce Labs Onesie")
         # proceed to checkout
@@ -42,7 +42,7 @@ class Test_02_add_products_to_cart():
         checkout_page = CheckoutPage(browser)
         checkout_page.assert_checkout_page_title()
         checkout_page.fill_in_checkout_form_continue()
-        checkout_page.assert_checkout_overview_products(("Sauce Labs Onesie", "Sauce Labs Backpack"))
+        checkout_page.assert_checkout_overview_products("Sauce Labs Onesie", "Sauce Labs Backpack")
         checkout_page.assert_checkout_overview_page_title()
         checkout_page.click_btn_finish()
         checkout_page.assert_checkout_complete_elements()
