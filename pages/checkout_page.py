@@ -50,18 +50,18 @@ class CheckoutPage(BasePage):
     def assert_checkout_page_title(self): 
         self.assert_page_title(self.checkout_page_title_locator, self.checkout_page_title_text)
 
-    def assert_checkout_overview_elements(self):
+    def assert_checkout_overview_products(self, products):
         product_page = ProductsPage(self.browser)
-        self.assert_element_displayed(product_page.backpack_locator)
-        self.assert_element_displayed(product_page.onesie_locator)
+        for product in products:
+            item_locator = (product_page.item_locator[0], product_page.item_locator[1].format(product))
+            self.assert_element_displayed(item_locator)
+
+    def assert_checkout_overview_page_title(self):
         self.assert_page_title(self.checkout_page_title_locator, self.checkout_page_title_text_overview)
-        # captured_text = self.capture_element_text(self.checkout_page_title_locator)
-        # assert captured_text == self.checkout_page_title_text_overview
+
 
     def assert_checkout_complete_elements(self):
         self.assert_page_title(self.checkout_page_title_locator, self.checkout_page_title_text_complete)
-        #captured_text = self.capture_element_text(self.checkout_page_title_locator)
-        #assert captured_text == self.checkout_page_title_text_complete
         self.assert_element_displayed(self.img_poney_express_ok)
         self.assert_element_displayed(self.txt_thank_you)
         self.assert_element_displayed(self.txt_order_dispatched)

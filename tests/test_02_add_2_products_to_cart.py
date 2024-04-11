@@ -1,4 +1,6 @@
 import time
+
+from selenium.webdriver.remote.webdriver import WebDriver
 from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
 from pages.item_page import ItemPage
@@ -10,7 +12,7 @@ class Test_02_add_products_to_cart():
     username = "standard_user"
     password = "secret_sauce"
 
-    def test_02_add_products_to_cart(self, browser):
+    def test_02_add_products_to_cart(self, browser: WebDriver):
         time.sleep(3) # for demo purposes
         # user logs in
         login_page = LoginPage(browser)
@@ -29,17 +31,18 @@ class Test_02_add_products_to_cart():
         shopping_cart_page.assert_item_displayed("Sauce Labs Backpack")
         # Adding Onesie as item
         shopping_cart_page.click_continue_shopping()
-        products_page.find_and_enter_onesie_item_page()
+        products_page.find_and_enter_item_page("Sauce Labs Onesie")
         item_page.click_btn_add_to_cart()
         # ASSERTing Onesie in cart
         item_page.click_btn_view_shopping_cart()
         shopping_cart_page.assert_cart_page_title()
-        shopping_cart_page.assert_onesie_displayed()
+        shopping_cart_page.assert_item_displayed("Sauce Labs Onesie")
         # proceed to checkout
         shopping_cart_page.click_checkout()
         checkout_page = CheckoutPage(browser)
         checkout_page.assert_checkout_page_title()
         checkout_page.fill_in_checkout_form_continue()
-        checkout_page.assert_checkout_overview_elements()
+        checkout_page.assert_checkout_overview_products(("Sauce Labs Onesie", "Sauce Labs Backpack"))
+        checkout_page.assert_checkout_overview_page_title()
         checkout_page.click_btn_finish()
         checkout_page.assert_checkout_complete_elements()
