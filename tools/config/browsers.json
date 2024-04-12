@@ -5,7 +5,9 @@
             "latest": {
                 "image": "selenoid/firefox:latest",
                 "port": "4444",
-                "path": "/wd/hub"
+                "path": "/wd/hub",
+                "enableVideo": true,
+                "enableVNC": true
             }
         }
     },
@@ -15,7 +17,9 @@
             "latest": {
                 "image": "selenoid/chrome:latest",
                 "port": "4444",
-                "path": "/"
+                "path": "/",
+                "enableVideo": true,
+                "enableVNC": true
             }
         }
     }

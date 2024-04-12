@@ -32,11 +32,6 @@ def browser(request):
     # Check if --browser parameter is passed
     headless = request.config.getoption("--headless")
 
-        # Define desired capabilities
-    capabilities = {
-        "chrome": DesiredCapabilities.CHROME.copy(),
-        "firefox": DesiredCapabilities.FIREFOX.copy(),
-    }
     options = {
         "chrome": ChromeOptions(),
         "firefox": FirefoxOptions(),
@@ -44,14 +39,15 @@ def browser(request):
 
     if use_remote:
         # Set Selenoid options for video recording
-        selenoid_options = {"enableVideo": True}
+        selenoid_options = {"enableVideo": True, "enableVNC": True}
         if headless and browser_type.lower()=="chrome":
             selenoid_options.update({"headless": True})
         if headless and browser_type.lower()=="firefox":
             selenoid_options.update({"moz:headless": True})
 
         options[browser_type].set_capability("selenoid:options", selenoid_options)
-        driver = webdriver.Remote(selenoid_url, desired_capabilities=capabilities[browser_type], options=options[browser_type]) ###SERVER DOWN!!!
+        
+        driver = webdriver.Remote(command_executor=selenoid_url, options=options[browser_type])
     
     if not use_remote:
         # Define options for Chrome and Firefox
@@ -60,7 +56,6 @@ def browser(request):
             "firefox": FirefoxOptions(),
         }
 
-        # I was having fun... why not?
         if headless:
             options[browser_type].add_argument("--headless")
 

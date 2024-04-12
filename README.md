@@ -11,5 +11,5 @@ python -m pytest --browser chrome .\tests\test_01_login.py
 
 python -m pytest --remote --browser firefox .\tests\test_01_login.py
 
-python -m pytest --remote --browser --headless chrome .\tests\test_01_login.py
+python -m pytest --remote --browser chrome --headless .\tests\test_01_login.py
 
