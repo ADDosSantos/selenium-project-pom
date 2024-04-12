@@ -45,9 +45,9 @@ def browser(request):
     if use_remote:
         # Set Selenoid options for video recording
         selenoid_options = {"enableVideo": True}
-        if headless and browser_type.lowercase()=="chrome":
+        if headless and browser_type.lower()=="chrome":
             selenoid_options.update({"headless": True})
-        if headless and browser_type.lowercase()=="firefox":
+        if headless and browser_type.lower()=="firefox":
             selenoid_options.update({"moz:headless": True})
 
         options[browser_type].set_capability("selenoid:options", selenoid_options)
