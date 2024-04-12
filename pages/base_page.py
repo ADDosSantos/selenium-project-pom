@@ -26,6 +26,9 @@ class BasePage:
 
     # Generic testing methods
 
+    def navigate_to(self, url):
+        self.driver.get(url)
+
     def assert_element_displayed(self, locator):
         assert self.driver.find_element(*locator).is_displayed(), f"The element {locator} was NOT fount in the web page."
 

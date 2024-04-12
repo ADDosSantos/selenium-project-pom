@@ -13,10 +13,14 @@ base_url = "http://localhost"
 selenoid_url = f"{base_url}:4444/wd/hub"
 videos_url = f"{base_url}:4444/video/"
 
-# Create the project folder for videos if it doesn't exist
+# Create project folders for artifacts if they dn't exist
 videos_folder = "videos"
-if not os.path.exists(videos_folder):
-    os.makedirs(videos_folder)
+reports_folder = "reports"
+folders_to_create = [videos_folder, reports_folder]
+
+for folder in folders_to_create:
+    if not os.path.exists(folder):
+        os.makedirs(folder)
 
 def pytest_addoption(parser):
     parser.addoption("--remote", action="store_true", help="Run tests remotely using Selenoid")
@@ -77,7 +81,7 @@ def browser(request):
     # Initializing implicit wait
     driver.implicitly_wait(7) 
     session_id = driver.session_id
-    driver.get("https://www.saucedemo.com")
+    driver.get("about:blank")
 
     yield driver
 

@@ -9,7 +9,8 @@ usage example
 (default)
 python -m pytest --browser chrome .\tests\test_01_login.py 
 
-python -m pytest --remote --browser firefox .\tests\test_01_login.py
+###
+python -m pytest --remote --browser firefox --cucumberjson= .\reports --gherkin-terminal-reporter .\features
 
 python -m pytest --remote --browser chrome --headless .\tests\test_01_login.py
 

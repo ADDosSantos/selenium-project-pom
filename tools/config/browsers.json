@@ -6,8 +6,7 @@
                 "image": "selenoid/firefox:latest",
                 "port": "4444",
                 "path": "/wd/hub",
-                "enableVideo": true,
-                "enableVNC": true
+                "enableVideo": true
             }
         }
     },
@@ -18,8 +17,7 @@
                 "image": "selenoid/chrome:latest",
                 "port": "4444",
                 "path": "/",
-                "enableVideo": true,
-                "enableVNC": true
+                "enableVideo": true
             }
         }
     }

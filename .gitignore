@@ -84,7 +84,9 @@ ipython_config.py
 
 # videos
 videos
-ffmpeg
+
+# reports
+reports
 
 # Selenoid
 *.exe
