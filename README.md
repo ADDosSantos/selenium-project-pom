@@ -14,3 +14,6 @@ python -m pytest --remote --browser firefox --cucumberjson= .\reports --gherkin-
 
 python -m pytest --remote --browser chrome --headless .\tests\test_01_login.py
 
+pytest tests/step_definitions/test_login.py -v -s
+
+pytest tests/step_definitions/test_login.py::test_testing_login -v -s --headless --full-trace --exitfirst

@@ -7,6 +7,8 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support.wait import WebDriverWait
+from tests.step_definitions.common_steps import * 
+# In Pytest BDD the common steps must be made available in the conftest.py.
 
 # Configuring Selenoid
 base_url = "http://localhost"
@@ -26,7 +28,11 @@ def pytest_addoption(parser):
     parser.addoption("--remote", action="store_true", help="Run tests remotely using Selenoid")
     parser.addoption("--headless", action="store_true", help="Specify headless execution for testing")
     parser.addoption("--browser", action="store", default="chrome", help="Specify the browser for testing")
-    
+
+@pytest.fixture(scope="session")
+def flag_headless(request):
+    return request.config.getoption("--headless")
+
 @pytest.fixture(scope="class")
 def browser(request):
     # Check if --local parameter is passed
@@ -86,9 +92,11 @@ def browser(request):
     yield driver
 
     # Begin Teardown
-    print(session_id)
+    print(f"\n Session Id: {session_id}")
+
     driver.quit()
-    if use_remote:
+    if use_remote and not headless:
+        print(f"\n Video Url: {videos_url}{session_id}.mp4")
         download_video(session_id)
 
 @pytest.fixture
