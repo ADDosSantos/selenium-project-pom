@@ -87,10 +87,7 @@ class CheckoutPage(BasePage):
         print("..................... data_dict as locator_input_matches")
         print(locator_input_matches)
         for key, value in locator_input_matches.items():
-            # this could be more syntetic, but easier to read this way.
             attribute_name = key
-            print("..................... attribute_name")
-            print(attribute_name)
             locator = getattr(self, attribute_name, None)
             self.driver.find_element(*locator).send_keys(value)
         
@@ -123,5 +120,4 @@ class CheckoutPage(BasePage):
     def validate_error_message_as_expected(self, error_message):
         self.assert_element_displayed(self.error_message_locator)
         captured_text = self.capture_element_text(self.error_message_locator)
-        print(f"\n\n{captured_text}\n\n")
         assert error_message in captured_text, f"\nCaptured text {captured_text} does not match expected text: {error_message}. (Contained)"

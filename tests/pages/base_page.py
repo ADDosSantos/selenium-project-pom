@@ -78,16 +78,10 @@ class BasePage:
         print(attr_table)
 
         attr_table = self.convert_datatable_to_list(attr_table)
-        print("-------------------- attr_table as string")
-        print(attr_table)
-
         data_dict = {}
         for i in range(len(attr_table[0])):
             attribute_name = attr_table[0][i]
             locator_key = locators.get(attribute_name)
             if locator_key:
                 data_dict[locator_key] = attr_table[1][i]
-
-        print("-------------------- attr table as data_dict")
-        print(data_dict)
         return data_dict

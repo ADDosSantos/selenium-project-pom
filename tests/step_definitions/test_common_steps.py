@@ -1,11 +1,9 @@
-import time
 from selenium.webdriver.remote.webdriver import WebDriver
 from tests.pages.login_page import LoginPage
 from tests.pages.products_page import ProductsPage
-from tests.pages.item_page import ItemPage
 from tests.pages.shopping_cart_page import CartPage
 from tests.pages.checkout_page import CheckoutPage
-from pytest_bdd import scenarios, given, when, then
+from pytest_bdd import given
 
 
 @given('the user is logged in with valid credentials')

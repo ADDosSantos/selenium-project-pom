@@ -48,34 +48,20 @@ class ProductsPage(BasePage):
             if random_index not in selected_prod_indices:
                 # Mark the index as selected
                 selected_prod_indices.add(random_index)
-
                 # Get the item at the index 
                 # PS: here is the list of returned elements, we use the random index - 1 (first is 0)
                 item = all_items[random_index-1]
-                print("................................................")
-                print("item: ", item)
-
                 # Click the Button "Add to Cart" for the chosen item
                 # This item's button, the xpath of the "parent item" concatenated with 
                 # the additional xpath to retrieve the button child element.
                 # PS: here is the xpath, we use the random index (as is. vide supra)
-
                 specific_item_xpath = "(" + (self.general_item_locator[1])+")["+ str(random_index) +"]"
-                print("specific_item_xpath: ", specific_item_xpath)
-
                 item_add_to_cart_btn_xpath = specific_item_xpath + self.item_relative_add_to_cart_btn_xpath
-                print("item_add_to_cart_btn_xpath: ", item_add_to_cart_btn_xpath)
-                print("CLICK!!!")
                 self.click((By.XPATH, item_add_to_cart_btn_xpath))
-                
                 # Get item name and price
                 item_name = item.text
                 item_price_locator = specific_item_xpath + self.item_relative_price_info_xpath
-                item_price = self.find_element((By.XPATH, item_price_locator)).text
-                print("Item name: ", item_name)
-                print("Item price: ", item_price)
-                print("................................................")
-                
+                item_price = self.find_element((By.XPATH, item_price_locator)).text                
                 # Store the item using the shopping_list fixture :-)
                 shopping_list[item_name] = item_price
 

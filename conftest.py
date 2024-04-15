@@ -5,7 +5,6 @@ import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support.wait import WebDriverWait
 from tests.step_definitions.test_common_steps import * 
 # In Pytest BDD the common steps must be made available in the conftest.py.

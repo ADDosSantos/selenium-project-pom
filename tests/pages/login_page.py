@@ -35,7 +35,6 @@ class LoginPage(BasePage):
 
     def assert_bad_login_error_message(self, error_message):
         captured_text = self.capture_element_text(self.login_error_message_locator)
-        print(f"\n\n{captured_text}\n\n")
         assert error_message in captured_text, f"\nCaptured text {captured_text} does not match expected text: {error_message}. (Contained)"
 
     def is_on_login_page(self):
