@@ -18,7 +18,7 @@ Display of short FE Automation project, for recruitment process purposes
 - Python in PATH, as expected (installation step).
 - git bash or equivalent is usable.
 
-- This Demo was created assuming an execution in Powershell, as described below in the Installation and Use sections
+- This Demo was created assuming possibility to execute Powershell scripts, as described below in the Installation and Use sections
 - IF working with VS Code, to view and run, careful that there have been some known issues with the PowerShell extension working with Python venvs! Also refer to the Installation section below.
 
 #### 1.2 Other Thoughts
