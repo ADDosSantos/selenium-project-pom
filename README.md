@@ -1,4 +1,4 @@
-## VisionBox job Application Process
+## Vision-Box job Application Process
 
 Display of short FE Automation project, for recruitment process purposes
 (other than this, All rights reserved)
