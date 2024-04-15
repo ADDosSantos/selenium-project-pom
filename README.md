@@ -10,7 +10,7 @@ Display of short FE Automation project, for recruitment process purposes
 4. Use
 5. Notes
 
-### 1. Requirements and Assumptions/Other Thoughts
+### 1. Requirements and Assumptions
 #### 1.1 Requirements and Assumptions
 - Test execution machine OS: Windows
 - Power Shell (used for: creation of venv, activation of venv, triggering the installation of dependencies)
@@ -20,13 +20,6 @@ Display of short FE Automation project, for recruitment process purposes
 
 - This Demo was created assuming possibility to execute Powershell scripts, as described below in the Installation and Use sections
 - IF working with VS Code, to view and run, careful that there have been some known issues with the PowerShell extension working with Python venvs! Also refer to the Installation section below.
-
-#### 1.2 Other Thoughts
-
-- I imagine and worked assuming installation triggered and dependencies installed via a Pipeline, say Jenkins.
-- Aditionally, a script could import the relevant Cucumber Test cases from Jira/Xray (or other...)
-- A report file would be exported into Jira/Xray at the end of the execution. See Notes for possible library for this goal
-- Possible next step also includes Visual Regression Testing.
 
 ### 2. Demo Framework Specifications
 
@@ -87,7 +80,7 @@ Example combining custom and out-of-the-box possibilities
 ```pytest tests/ -v -s --remote```
 
 
-## 5. Notes
+## 5. Notes and other thoughts
 
 ***They don't theach this in Law School...*** :-)
 
@@ -105,3 +98,8 @@ Visual Regression Testing
 
     https://pypi.org/project/pixelmatch/
     (establish a baseline and run against it. Update baseline as per sanctioned ui changes)
+    
+- I imagine assuming as target that one day installation triggered and dependencies installed via a Pipeline e.g. Jenkins. Hence Selenoid containerized. 
+- Aditionally, a script could import the relevant Cucumber Test cases from Jira/Xray (or other...)
+- A report file would be exported into Jira/Xray at the end of the execution. See Notes for possible library for this goal
+- Possible next step also includes Visual Regression Testing.
