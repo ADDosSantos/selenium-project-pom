@@ -17,3 +17,7 @@ python -m pytest --remote --browser chrome --headless .\tests\test_01_login.py
 pytest tests/step_definitions/test_login.py -v -s
 
 pytest tests/step_definitions/test_login.py::test_testing_login -v -s --headless --full-trace --exitfirst
+
+pytest tests/step_definitions/test_checkout_your_information.py -v -s --remote --full-trace --exitfirst
+
+pytest tests/step_definitions/test_checkout_your_information.py -v -s --remote --full-trace --exitfirst --json-report --json-report-file reports/report.json

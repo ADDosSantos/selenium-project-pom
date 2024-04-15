@@ -1,4 +1,4 @@
-import time
+from selenium.webdriver.common.by import By
 
 class BasePage:
 
@@ -48,9 +48,46 @@ class BasePage:
             # if the data-table has a single value per line, the output is a list.
             # if the data-table has several values per line, the output will be a list of lists.
             items = line.strip().split('|')
-            items = [item.strip() for item in items]
+            items = [item.strip() for item in items if item.strip()] # if item.strip() evaluates to false if ''. so it effectively skips empty list item
             if len(items) == 1 and items[0]:
                 parsed_list.append(items[0])
             else:
                 parsed_list.append(items)
         return parsed_list
+    
+    def assert_list_of_locators(self, locators, attr_table):
+        for row in attr_table:
+            for element_name in row:
+                locator = locators.get(element_name)
+                if locator:
+                    assert self.assert_element_displayed(locator), f"Element '{locator}' is not visible"
+
+
+    def form_filler_multiple_fields_friendly_matcher(self, locators: dict, attr_table: str):
+        # receives a {"friend name": "locator_name"} and the parsed [["friendly name1", "friendly name2"]["input value1", "input value"]]
+        # returns matched {"locator_name": "value"}
+        # eg: 
+        # locators = {"First Name": "field_first_name_locator", "Last Name": "field_last_name_locator", "Zip/Postal Code": "field_postal_code_locator"}
+        # converted attr_table [['First Name', 'Last Name', 'Zip/Postal Code'], ['Antonio', 'Santos', '4567-123']]
+        # data_dict = {'field_first_name_locator': 'Antonio', 'field_last_name_locator': 'Santos', 'field_postal_code_locator': '4567-123'}
+        # however, 
+        # the data_dict must be returned to the child class so the field_first_name_locator gets replaced by
+        # a child class attribute values, such as (CheckoutPage) self.field_first_name_locator (By.XPATH, "//input[@id='first-name']")
+
+        print("-------------------- initial_attr_table")
+        print(attr_table)
+
+        attr_table = self.convert_datatable_to_list(attr_table)
+        print("-------------------- attr_table as string")
+        print(attr_table)
+
+        data_dict = {}
+        for i in range(len(attr_table[0])):
+            attribute_name = attr_table[0][i]
+            locator_key = locators.get(attribute_name)
+            if locator_key:
+                data_dict[locator_key] = attr_table[1][i]
+
+        print("-------------------- attr table as data_dict")
+        print(data_dict)
+        return data_dict

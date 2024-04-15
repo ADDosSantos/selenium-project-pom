@@ -104,6 +104,10 @@ def explicit_wait(driver):
     wait = WebDriverWait(driver, 30)
     yield wait
 
+@pytest.fixture(scope="function")
+def shopping_list():
+    return {}
+
 def download_video(session_id):
     # As per Selenoid documentation, target of the video.
     video_url = f"{videos_url}{session_id}.mp4"
@@ -123,7 +127,7 @@ def download_video(session_id):
                 for chunk in response.iter_content(chunk_size=8192):
                     if chunk:
                         f.write(chunk)
-            print(f"Video file downloaded successfully to {file_path}")
+            print(f"\nVideo file downloaded successfully to {file_path}")
             break
         elif retry == 3:
-            print("Failed to download video file")
+            print("\nFailed to download video file")

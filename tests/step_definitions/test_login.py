@@ -6,10 +6,6 @@ from pages.products_page import ProductsPage
 
 scenarios("../features/login.feature")  
 
-@scenario('login.feature', 'Successful login')
-def login():
-    pass
-
 # Given steps
 @given("the user is on the login page")
 def user_is_on_login_page(browser, flag_headless):
@@ -52,11 +48,6 @@ def the_following_error_message_should_be_present(browser, error_message):
 def then_user_redirected_to_products_page(browser):
     products_page = ProductsPage(browser)
     products_page.assert_products_page_title()
-
-#@then("an error message should be displayed")
-#def then_error_message_displayed(browser):
-#    login_page = LoginPage(browser)
-#    login_page.assert_bad_login_error_message()
 
 @then("the user should remain on the login page")
 def then_user_remains_on_login_page(browser):

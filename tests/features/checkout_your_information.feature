@@ -8,8 +8,7 @@ Feature: Checkout - Your Information
 
   Scenario: User verifies expected elements on the checkout: Your Information page
     Given the user is on the checkout: Your Information page
-    Then the title of the page should be "Checkout: Your Information"
-    And the following elements should be visible:
+    Then the following elements should be visible:
       | Elements         |
       | first name field |
       | last name field  |
@@ -27,21 +26,24 @@ Feature: Checkout - Your Information
 
   Scenario Outline: User fills in the checkout form partially and validates error messages
     Given the user is on the checkout: Your Information page
-    When the user fills in the form with the partial information first name: <first_name>, last name: <last_name>, zip code: <zip_code>, and submits it
+    When the user fills in the form with the partial information first name: <first_name>, last name: <last_name>, zip code: <postal_code>, and submits it
     Then the error message "<error_message>" should be displayed
 
     Examples: 
-      | first_name | last_name | zip_code | error_message                  |
-      | Antonio    |           |          | Error: Postal Code is required |
-      |            | Santos    | 4567-123 | Error: First Name is required  |
-      | Antonio    |           | 4567-123 | Error: Last Name is required   |
+      | first_name | last_name | postal_code | error_message                  |
+      | Antonio    | Santos    | empty       | Error: Postal Code is required |
+      | empty      | Santos    |    4567-123 | Error: First Name is required  |
+      | Antonio    | empty     |    4567-123 | Error: Last Name is required   |
+      | Antonio    | empty     | empty       | Error: Last Name is required   |
 
   Scenario: User clicks the Cancel button
     Given the user is on the checkout: Your Information page
     When the user clicks the Cancel button
-    Then the user should be redirected to the home page
+    Then the user should be redirected to Your Cart page
+    And the user sees his previously chosen items
 
-  Scenario: User clicks the Cart button
+  Scenario: User retuns to Shopping Cart
     Given the user is on the checkout: Your Information page
-    When the user clicks the Cart button
-    Then the user has navigated to the cart
+    When the user clicks the Cart icon
+    Then the user should be redirected to Your Cart page
+    And the user sees his previously chosen items

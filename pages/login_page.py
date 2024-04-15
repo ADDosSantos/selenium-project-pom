@@ -51,8 +51,4 @@ class LoginPage(BasePage):
             "Login credentials": "your_login_credentials_locator",
             "Passwords": "your_passwords_locator"
         }
-        for row in attr_table:
-            for element_name in row:
-                locator = locators.get(element_name)
-                if locator:
-                    assert self.assert_element_displayed(locator), f"Element '{locator}' is not visible"
+        self.assert_list_of_locators(locators, attr_table)

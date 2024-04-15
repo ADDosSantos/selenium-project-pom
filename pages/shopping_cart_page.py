@@ -24,3 +24,7 @@ class CartPage(BasePage):
 
     def assert_cart_page_title(self):
         self.assert_page_title(self.cart_page_title_locator, self.cart_page_title_text)
+
+    def validate_presence_of_selected_items(self, shopping_list):
+        for item in shopping_list.keys():
+            self.assert_item_displayed(item)
