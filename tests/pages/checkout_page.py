@@ -1,5 +1,5 @@
-from pages.base_page import BasePage
-from pages.products_page import ProductsPage
+from tests.pages.base_page import BasePage
+from tests.pages.products_page import ProductsPage
 from selenium.webdriver.common.by import By
 from faker import Faker
 import random

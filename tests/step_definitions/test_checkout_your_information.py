@@ -1,24 +1,19 @@
-import time
-from selenium.webdriver.remote.webdriver import WebDriver
-from pages.login_page import LoginPage
-from pages.products_page import ProductsPage
-from pages.item_page import ItemPage
-from pages.shopping_cart_page import CartPage
-from pages.checkout_page import CheckoutPage
+from tests.pages.shopping_cart_page import CartPage
+from tests.pages.checkout_page import CheckoutPage
 from pytest_bdd import (
     scenarios,
     given,
-    scenario,
     then,
     when,
     parsers,
 )
 
+# This assumes that 'features' subfolder is in the same directory as this file
 scenarios("../features/checkout_your_information.feature")
 
 # Given steps
 
-@given("the user is on the checkout: Your Information page")
+@given("the user is on the Checkout Your Information page")
 def user_is_on_checkout_your_information_page(browser):
     checkout_page = CheckoutPage(browser)
     checkout_page.assert_checkout_page_title()
@@ -35,7 +30,6 @@ def user_fills_in_checkout_form(browser, attr_table):
 def user_clicks_continue(browser):
     checkout_page = CheckoutPage(browser)
     checkout_page.click_continue_checkout()
-
 
 
 @when(parsers.parse("the user fills in the form with the partial information first name: {first_name}, last name: {last_name}, zip code: {postal_code}, and submits it"))

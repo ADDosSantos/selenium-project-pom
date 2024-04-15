@@ -7,7 +7,7 @@ Feature: Checkout - Your Information
     And the user begins the checkout process
 
   Scenario: User verifies expected elements on the checkout: Your Information page
-    Given the user is on the checkout: Your Information page
+    Given the user is on the Checkout Your Information page
     Then the following elements should be visible:
       | Elements         |
       | first name field |
@@ -17,7 +17,7 @@ Feature: Checkout - Your Information
       | cancel button    |
 
   Scenario: User fills in the checkout form with valid information
-    Given the user is on the checkout: Your Information page
+    Given the user is on the Checkout Your Information page
     When the user fills in the form with the following input:
       | First Name | Last Name | Zip/Postal Code |
       | Antonio    | Santos    |        4567-123 |
@@ -25,7 +25,7 @@ Feature: Checkout - Your Information
     Then the user should be redirected to the checkout: Overview page
 
   Scenario Outline: User fills in the checkout form partially and validates error messages
-    Given the user is on the checkout: Your Information page
+    Given the user is on the Checkout Your Information page
     When the user fills in the form with the partial information first name: <first_name>, last name: <last_name>, zip code: <postal_code>, and submits it
     Then the error message "<error_message>" should be displayed
 
@@ -37,13 +37,13 @@ Feature: Checkout - Your Information
       | Antonio    | empty     | empty       | Error: Last Name is required   |
 
   Scenario: User clicks the Cancel button
-    Given the user is on the checkout: Your Information page
+    Given the user is on the Checkout Your Information page
     When the user clicks the Cancel button
     Then the user should be redirected to Your Cart page
     And the user sees his previously chosen items
 
   Scenario: User retuns to Shopping Cart
-    Given the user is on the checkout: Your Information page
+    Given the user is on the Checkout Your Information page
     When the user clicks the Cart icon
     Then the user should be redirected to Your Cart page
     And the user sees his previously chosen items

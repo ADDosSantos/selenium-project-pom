@@ -1,10 +1,11 @@
-import pytest
 from pytest_bdd import parsers, scenarios, scenario, given, when, then
-from pages.login_page import LoginPage
-from pages.products_page import ProductsPage
+from tests.pages.login_page import LoginPage
+from tests.pages.products_page import ProductsPage
 
+# This assumes that 'features' subfolder is in the same directory as this file
+# scenarios('features')
 
-scenarios("../features/login.feature")  
+scenarios("../features/login.feature")
 
 # Given steps
 @given("the user is on the login page")
@@ -13,6 +14,11 @@ def user_is_on_login_page(browser, flag_headless):
     login_page.open(flag_headless)
 
 # When steps
+@when("the user enters valid credentials")
+def user_enters_valid_credentials(browser):
+    login_page = LoginPage(browser)
+    login_page.perform_login("standard_user", "secret_sauce")
+
 @when("the user enters valid credentials")
 def user_enters_valid_credentials(browser):
     login_page = LoginPage(browser)
