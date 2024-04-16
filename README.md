@@ -67,17 +67,15 @@ will trigger headless browser execution
 ```--remote```
 will trigger remote execution, with video download
 
-Example combining custom and out-of-the-box possibilities
+Example combining custom and out-of-the-box possibilities:
 
 ```python -m pytest --remote --browser firefox --cucumberjson= .\reports --gherkin-terminal-reporter .\features\report```
 
-```python -m tests/step_definitions/test_login.py::test_testing_login -v -s --remote --full-trace --exitfirst```
+```python -m pytest tests/step_definitions/test_login.py::test_testing_login -v -s --remote --full-trace --exitfirst```
 
-```python -m tests/step_definitions/test_checkout_your_information.py -v -s --remote --browser chrome --json-report --json-report-file reports/report.json```
+```python -m pytest tests/step_definitions/test_checkout_your_information.py -v -s --remote --browser chrome --json-report --json-report-file reports/report.json```
 
-```python -m tests/step_definitions/test_checkout_your_information.py -v -s --remote --full-trace --exitfirst --json-report --json-report-file reports/report.json```
-
-```pytest tests/ -v -s --remote```
+```python -m pytest tests/step_definitions/test_checkout_your_information.py -v -s --remote --full-trace --exitfirst --json-report --json-report-file reports/report.json```
 
 
 ## 5. Notes and other thoughts
@@ -86,6 +84,12 @@ Example combining custom and out-of-the-box possibilities
 
 Selenoid uses the _browsers.json_ to setup the available browser webdrivers. 
 Currently: latest Chrome and latest Firefox.
+
+Improval points:
+
+- Friendlier video naming;
+- possibility for remote + headless
+- revisit locator strategy
 
 Future explorations!
 
