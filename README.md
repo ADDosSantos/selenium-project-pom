@@ -72,15 +72,16 @@ will trigger remote execution, with video download
 Since we are using pytest-xdist, this flag will trigger parallel executions
 Currently, Selenoid is limited to a max 5 agents running in parallel remote.
 
-Example combining custom and out-of-the-box possibilities
 
-```python -m pytest -n 2 .\tests --remote --browser firefox```
+Example combining custom and out-of-the-box possibilities:
+
+```python -m pytest -n 2 /tests --browser firefox```
 
 ```python -m pytest tests/step_definitions/test_login.py::test_testing_login -v -s --remote --full-trace --exitfirst```
 
-```python -m pytest tests/step_definitions/test_checkout_your_information.py -v -s --remote --browser chrome --json-report --json-report-file reports/report.json```
+```python -m pytest tests/step_definitions/test_checkout_your_information.py -v -s --headless --browser chrome --json-report --json-report-file reports/report.json```
 
-```python -m pytest -n 5 tests/step_definitions/test_checkout_your_information.py -v -s --remote --json-report --json-report-file reports/report.json```
+```python -m pytest -n 5 /tests -v -s --remote --json-report --json-report-file reports/report.json```
 
 ## 5. Notes and other thoughts
 
@@ -94,6 +95,12 @@ As per Aerokube documentation as of version 1.6.0, the formula for theoretical m
 number of cores * 1.5 -2 = max nr parallel sessions
 
 https://aerokube.com/selenoid/1.6.0/
+
+Improval points:
+
+- Friendlier video naming;
+- possibility for remote + headless
+- revisit locator strategy
 
 Future explorations!
 
