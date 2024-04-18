@@ -29,6 +29,7 @@ Display of short FE Automation project, for recruitment process purposes
 - Pytest-BDD for Cucumber TC parsing
 - using venv for virtual environment (separation between host and execution environment)
 - Multi-browser (Chrome and Firefox)
+- Pytest-xdist for Parallel Executions (if using Selenoid, default limitation is for 5 parallel sessions)
 - Webdriver (remote Chrome and Fire) Selenoid (http://localhost:4444) with UI (http://localhost:8080) for realtime viewing of execution and video capture
 - Execution videos downloaded from Selenoid to local machine. Video URL provided in console.
 - currently, cucumber.json reporting
@@ -67,18 +68,19 @@ will trigger headless browser execution
 ```--remote```
 will trigger remote execution, with video download
 
+```-n 3```
+Since we are using pytest-xdist, this flag will trigger parallel executions
+Currently, Selenoid is limited to a max 5 agents running in parallel remote.
+
 Example combining custom and out-of-the-box possibilities
 
-```python -m pytest --remote --browser firefox --cucumberjson= .\reports --gherkin-terminal-reporter .\features\report```
+```python -m pytest -n 2 .\tests --remote --browser firefox```
 
-```python -m tests/step_definitions/test_login.py::test_testing_login -v -s --remote --full-trace --exitfirst```
+```python -m pytest tests/step_definitions/test_login.py::test_testing_login -v -s --remote --full-trace --exitfirst```
 
-```python -m tests/step_definitions/test_checkout_your_information.py -v -s --remote --browser chrome --json-report --json-report-file reports/report.json```
+```python -m pytest tests/step_definitions/test_checkout_your_information.py -v -s --remote --browser chrome --json-report --json-report-file reports/report.json```
 
-```python -m tests/step_definitions/test_checkout_your_information.py -v -s --remote --full-trace --exitfirst --json-report --json-report-file reports/report.json```
-
-```pytest tests/ -v -s --remote```
-
+```python -m pytest -n 5 tests/step_definitions/test_checkout_your_information.py -v -s --remote --json-report --json-report-file reports/report.json```
 
 ## 5. Notes and other thoughts
 
@@ -86,6 +88,12 @@ Example combining custom and out-of-the-box possibilities
 
 Selenoid uses the _browsers.json_ to setup the available browser webdrivers. 
 Currently: latest Chrome and latest Firefox.
+
+Also, number of parallel sessions is limited by hardware capability.
+As per Aerokube documentation as of version 1.6.0, the formula for theoretical max is:
+number of cores * 1.5 -2 = max nr parallel sessions
+
+https://aerokube.com/selenoid/1.6.0/
 
 Future explorations!
 
